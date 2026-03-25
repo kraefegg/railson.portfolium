@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KRAEFEGG M.O. — Tech Portfolio</title>
+<meta name="description" content="Software engineering, data platforms & DevOps portfolio — KRAEFEGG M.O.">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080b10;--bg2:#0c1018;--bg3:#111620;--card:#0f1420;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --green:#00ff9d;--green2:#00c97a;--cyan:#00d4ff;--purple:#9d7aff;
+  --orange:#ff8c42;--pink:#ff4d9d;--yellow:#ffd166;
+  --text:#dde4f0;--muted:#5a6a7e;--muted2:#8896a8;--white:#fff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden}
+
+/* GRID BG */
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,157,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,157,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:rgba(8,11,16,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-bracket{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--green)}
+.logo-text{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--muted2);letter-spacing:.05em}
+.nav-status{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--green)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:var(--muted2);text-decoration:none;font-size:.8rem;font-family:'JetBrains Mono',monospace;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:7rem 5% 4rem;position:relative;overflow:hidden;max-width:1200px;margin:0 auto}
+.hero-glow{position:absolute;top:30%;left:20%;width:500px;height:500px;background:radial-gradient(ellipse,rgba(0,255,157,.05) 0%,transparent 65%);pointer-events:none}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--green);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:up .7s .1s ease forwards}
+.hero-eyebrow span{color:var(--muted);margin:0 .5rem}
+.hero h1{font-family:'JetBrains Mono',monospace;font-size:clamp(2rem,5vw,4rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.25rem;opacity:0;animation:up .7s .2s ease forwards}
+.hero h1 .hl-g{color:var(--green)}
+.hero h1 .hl-c{color:var(--cyan)}
+.hero h1 .hl-p{color:var(--purple)}
+.hero-sub{max-width:600px;color:var(--muted2);font-size:1rem;line-height:1.75;margin-bottom:2.5rem;opacity:0;animation:up .7s .3s ease forwards}
+.hero-stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:3rem;opacity:0;animation:up .7s .4s ease forwards}
+.stk{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.3rem .75rem;border:1px solid var(--border2);border-radius:4px;color:var(--muted2);letter-spacing:.04em;transition:all .2s;cursor:default}
+.stk:hover{border-color:var(--green);color:var(--green);background:rgba(0,255,157,.06)}
+.hero-cta{display:flex;gap:1rem;opacity:0;animation:up .7s .5s ease forwards}
+.btn-g{padding:.75rem 2rem;background:var(--green);color:#080b10;border-radius:6px;font-weight:700;font-size:.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;transition:all .2s;box-shadow:0 0 30px rgba(0,255,157,.2)}
+.btn-g:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,255,157,.35)}
+.btn-o{padding:.75rem 2rem;border:1px solid var(--border2);color:var(--text);border-radius:6px;font-size:.85rem;text-decoration:none;font-family:'JetBrains Mono',monospace;transition:all .2s}
+.btn-o:hover{border-color:rgba(0,255,157,.4);color:var(--green)}
+
+/* TERMINAL CARD */
+.term-card{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:1.5rem;margin-top:3rem;opacity:0;animation:up .7s .6s ease forwards;max-width:580px}
+.term-bar{display:flex;gap:6px;align-items:center;margin-bottom:1rem}
+.term-dot{width:10px;height:10px;border-radius:50%}
+.td-r{background:#ff5f57}.td-y{background:#febc2e}.td-g{background:#28c840}
+.term-line{font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.8}
+.term-line .prompt{color:var(--green)}
+.term-line .cmd{color:var(--cyan)}
+.term-line .out{color:var(--muted2)}
+.term-line .val{color:var(--yellow)}
+.term-line .ok{color:var(--green)}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--green);margin-left:2px;animation:blink 1s infinite;vertical-align:text-bottom}
+
+/* STATS */
+.stats-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);padding:2rem 5%;display:flex;justify-content:center;gap:5rem;flex-wrap:wrap}
+.st{text-align:center}
+.st-num{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;color:var(--green);display:block}
+.st-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-family:'JetBrains Mono',monospace}
+
+/* SECTIONS */
+.wrap{max-width:1200px;margin:0 auto;padding:5rem 5%}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.18em;color:var(--green);display:block;margin-bottom:.5rem}
+.sec-label::before{content:'// '}
+.sec-title{font-family:'JetBrains Mono',monospace;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:.75rem}
+.sec-sub{color:var(--muted2);font-size:.9rem;max-width:520px;margin-bottom:3rem}
+
+/* FILTER */
+.filter-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.ftab{padding:.35rem 1rem;border-radius:4px;border:1px solid var(--border);font-size:.72rem;cursor:pointer;background:transparent;color:var(--muted);font-family:'JetBrains Mono',monospace;transition:all .2s;letter-spacing:.04em}
+.ftab:hover,.ftab.active{background:rgba(0,255,157,.08);border-color:rgba(0,255,157,.35);color:var(--green)}
+
+/* PROJECT GRID */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.5rem}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.75rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--card-acc,var(--green)),transparent);opacity:0;transition:opacity .3s}
+.proj-card:hover{transform:translateY(-4px);border-color:rgba(0,255,157,.15);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.proj-card:hover::before{opacity:1}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.1rem}
+.card-icon{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.card-tags{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.18rem .55rem;border-radius:3px;font-weight:500;letter-spacing:.03em}
+.t-g{background:rgba(0,255,157,.08);color:var(--green);border:1px solid rgba(0,255,157,.2)}
+.t-c{background:rgba(0,212,255,.08);color:var(--cyan);border:1px solid rgba(0,212,255,.2)}
+.t-p{background:rgba(157,122,255,.08);color:var(--purple);border:1px solid rgba(157,122,255,.2)}
+.t-o{background:rgba(255,140,66,.08);color:var(--orange);border:1px solid rgba(255,140,66,.2)}
+.t-pk{background:rgba(255,77,157,.08);color:var(--pink);border:1px solid rgba(255,77,157,.2)}
+.t-y{background:rgba(255,209,102,.08);color:var(--yellow);border:1px solid rgba(255,209,102,.2)}
+.card-title{font-family:'JetBrains Mono',monospace;font-size:.92rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+.card-desc{font-size:.82rem;color:var(--muted2);line-height:1.65;margin-bottom:1.1rem}
+.card-stack{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem}
+.stk-pill{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.15rem .5rem;border-radius:3px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted2)}
+.card-foot{display:flex;justify-content:space-between;align-items:center;padding-top:.85rem;border-top:1px solid var(--border);font-size:.72rem}
+.card-year{color:var(--muted);font-family:'JetBrains Mono',monospace}
+.card-sector{color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.68rem}
+
+/* SKILLS SECTION */
+.skills-bg{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;transition:border-color .2s}
+.skill-card:hover{border-color:rgba(0,255,157,.2)}
+.skill-icon{font-size:1.5rem;margin-bottom:.75rem;display:block}
+.skill-name{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;margin-bottom:.35rem;color:var(--white)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.6rem}
+
+/* CONTACT */
+.contact-sec{text-align:center;background:var(--bg2);border-top:1px solid var(--border);padding:5rem 5%}
+.contact-grid{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+.c-link{display:flex;align-items:center;gap:.6rem;padding:.8rem 1.6rem;background:var(--card);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.8rem;transition:all .2s}
+.c-link:hover{border-color:rgba(0,255,157,.3);color:var(--green)}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);z-index:800;display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--bg3);border:1px solid var(--border2);border-radius:16px;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;padding:2.5rem;transform:translateY(20px);transition:transform .3s;position:relative}
+.overlay.open .modal{transform:translateY(0)}
+.modal-close{position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,.06);border:none;color:var(--muted2);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:'JetBrains Mono',monospace}
+.modal-close:hover{background:rgba(255,255,255,.12);color:var(--white)}
+.modal-badge{display:inline-block;padding:.25rem .8rem;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.68rem;margin-bottom:.9rem;border:1px solid rgba(0,255,157,.25);color:var(--green);background:rgba(0,255,157,.05);letter-spacing:.06em;text-transform:uppercase}
+.modal h2{font-family:'JetBrains Mono',monospace;font-size:1.25rem;font-weight:700;margin-bottom:.4rem;padding-right:2.5rem;line-height:1.3}
+.modal-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.25rem 0}
+.m-item{background:var(--bg2);border-radius:8px;padding:.8rem}
+.m-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem}
+.m-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;color:var(--white)}
+.modal p{color:var(--muted2);font-size:.875rem;line-height:1.75;margin-bottom:1.1rem}
+.modal-stack{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0}
+.feat-title{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:var(--white);margin-bottom:.6rem}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.feat-list li{display:flex;gap:.55rem;font-size:.83rem;color:var(--muted2)}
+.feat-list li::before{content:'>';color:var(--green);font-family:'JetBrains Mono',monospace;flex-shrink:0}
+
+/* FOOTER */
+footer{padding:2rem 5%;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)}
+.f-logo{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--green);font-weight:700}
+footer p{font-size:.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+
+/* ANIM */
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.fade{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.fade.vis{opacity:1;transform:translateY(0)}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#1e2530;border-radius:3px}
+
+@media(max-width:768px){
+  nav{padding:0 4%}
+  .nav-links{display:none}
+  .wrap{padding:4rem 4%}
+  .hero{padding:6rem 4% 3rem}
+  .stats-strip{gap:2rem}
+  .modal{padding:1.75rem}
+  .modal-meta{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;gap:.75rem;text-align:center;padding:1.5rem 4%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <span class="logo-bracket">{ KRG }</span>
+    <span class="logo-text">M.O. / tech</span>
+  </div>
+  <div class="nav-links">
+    <a href="#projects">projects</a>
+    <a href="#skills">skills</a>
+    <a href="#contact">contact</a>
+  </div>
+  <div class="nav-status"><span class="status-dot"></span>available for projects</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">KRAEFEGG M.O.<span>//</span>Software & Data Engineering</div>
+  <h1>Building <span class="hl-g">data platforms</span>,<br><span class="hl-c">monitoring systems</span><br>& <span class="hl-p">DevOps pipelines</span></h1>
+  <p class="hero-sub">Full-stack engineering for sustainability, infrastructure monitoring, regulatory compliance and ESG reporting — private sector, enterprise-grade.</p>
+  <div class="hero-stack">
+    <span class="stk">Python</span><span class="stk">Node.js</span><span class="stk">PostgreSQL</span><span class="stk">React</span>
+    <span class="stk">Docker</span><span class="stk">REST APIs</span><span class="stk">Power BI</span><span class="stk">ETL Pipelines</span>
+    <span class="stk">AWS</span><span class="stk">Git / CI/CD</span><span class="stk">FastAPI</span><span class="stk">D3.js</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn-g">view_projects()</a>
+    <a href="#contact" class="btn-o">get_in_touch()</a>
+  </div>
+  <div class="term-card">
+    <div class="term-bar"><span class="term-dot td-r"></span><span class="term-dot td-y"></span><span class="term-dot td-g"></span></div>
+    <div class="term-line"><span class="prompt">$</span> <span class="cmd">git log --oneline --all</span></div>
+    <div class="term-line"><span class="out">a3f2c1d</span> <span class="val">feat: PSI monitoring platform v2.4 — multi-tenant</span></div>
+    <div class="term-line"><span class="out">b8e91aa</span> <span class="val">feat: ESG KPI engine — 42 indicators, PostgreSQL</span></div>
+    <div class="term-line"><span class="out">d14f09c</span> <span class="val">feat: GEE inventory pipeline — ISO 14064 compliant</span></div>
+    <div class="term-line"><span class="out">7c3b821</span> <span class="val">feat: regulatory sandbox API — ANTAQ/ANM/ANP</span></div>
+    <div class="term-line"><span class="out">f09ad3e</span> <span class="val">feat: docx automation engine — multi-sector proposals</span></div>
+    <div class="term-line"><span class="prompt">$</span> <span class="cmd">npm run deploy --prod</span></div>
+    <div class="term-line"><span class="ok">✓</span> <span class="out">8 projects deployed · 0 errors</span><span class="cursor"></span></div>
+  </div>
+</div>
+
+<div class="stats-strip">
+  <div class="st"><span class="st-num">8</span><span class="st-label">systems built</span></div>
+  <div class="st"><span class="st-num">42+</span><span class="st-label">KPIs modeled</span></div>
+  <div class="st"><span class="st-num">4</span><span class="st-label">industry sectors</span></div>
+  <div class="st"><span class="st-num">100%</span><span class="st-label">private sector</span></div>
+</div>
+
+<!-- PROJECTS -->
+<div class="wrap" id="projects">
+  <span class="sec-label fade">selected_work</span>
+  <h2 class="sec-title fade">Engineering Projects</h2>
+  <p class="sec-sub fade">Full-stack systems, data platforms and automation tools — all built for private sector infrastructure clients. Client identities protected under NDA.</p>
+  <div class="filter-row fade">
+    <button class="ftab active" onclick="filter('all',event)">all()</button>
+    <button class="ftab" onclick="filter('backend',event)">backend</button>
+    <button class="ftab" onclick="filter('data',event)">data_eng</button>
+    <button class="ftab" onclick="filter('devops',event)">devops</button>
+    <button class="ftab" onclick="filter('api',event)">api</button>
+    <button class="ftab" onclick="filter('automation',event)">automation</button>
+  </div>
+  <div class="proj-grid fade" id="grid"></div>
+</div>
+
+<!-- SKILLS -->
+<div class="skills-bg" id="skills">
+  <div class="wrap" style="padding-top:4rem;padding-bottom:4rem">
+    <span class="sec-label fade">capabilities</span>
+    <h2 class="sec-title fade">Tech Stack</h2>
+    <p class="sec-sub fade">Core engineering competencies across the full development lifecycle.</p>
+    <div class="skill-grid fade" id="skill-grid"></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-sec" id="contact">
+  <span class="sec-label" style="display:block;margin-bottom:.5rem">// get_in_touch</span>
+  <h2 class="sec-title">Let's build something.</h2>
+  <p style="color:var(--muted2);font-size:.9rem;max-width:480px;margin:.75rem auto 0">Open to engineering contracts, data platform projects and DevOps consulting. NDA available on request.</p>
+  <div class="contact-grid">
+    <a href="mailto:contato@kraefegg.com.br" class="c-link">📧 contato@kraefegg.com.br</a>
+    <a href="https://www.linkedin.com/in/railson-de-arruda" target="_blank" class="c-link">🔗 linkedin / railson-de-arruda</a>
+    <a href="https://github.com/kraefegg" target="_blank" class="c-link">🐙 github / kraefegg</a>
+  </div>
+</div>
+
+<footer>
+  <span class="f-logo">KRAEFEGG M.O.</span>
+  <p>/* all client data protected under NDA — 2026 */</p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeOv(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const PROJECTS=[
+  {
+    id:1, cat:['backend','data','devops'],
+    acc:'var(--green)',
+    icon:'🖥️', iconBg:'rgba(0,255,157,.1)',
+    title:'PSI Monitoring Platform',
+    subtitle:'Sustainability Infrastructure Program — multi-tenant SaaS',
+    year:'2024', duration:'10 mo', sector:'Infrastructure / Transport',
+    tags:[['full-stack','t-g'],['PostgreSQL','t-c'],['BI','t-c'],['multi-tenant','t-p']],
+    stack:['Node.js','React','PostgreSQL','Power BI','REST API','Docker','Nginx'],
+    desc:'End-to-end web platform for monitoring and evaluating Sustainable Development Parameters (PDS) across infrastructure concessions. Multi-tenant architecture serving multiple regulated operators with role-based access.',
+    full:'Built from scratch: requirements gathering, UX wireframes, relational DB modeling, RESTful API (Node.js/Express), React frontend with dynamic dashboards, automated ranking engine, and Power BI embedded reports. Delivered with full source-code transfer and operator training.',
+    features:[
+      'Multi-tenant architecture with RBAC (role-based access control)',
+      'Automated IDS (Sustainable Development Index) calculation engine',
+      'PostgreSQL DB with full audit trail and evidence traceability',
+      'Embedded Power BI dashboards — ranking, awards, trend charts',
+      'CI/CD pipeline with automated testing and Docker deployment',
+      'Transfer of full source code, docs and DB schema to client',
+    ]
+  },
+  {
+    id:2, cat:['data','backend'],
+    acc:'var(--cyan)',
+    icon:'📊', iconBg:'rgba(0,212,255,.1)',
+    title:'Multimodal KPI Engine',
+    subtitle:'42-indicator data platform for sustainable logistics corridors',
+    year:'2024', duration:'4 mo', sector:'Logistics / Transport',
+    tags:[['data-eng','t-c'],['KPI','t-c'],['PostgreSQL','t-c'],['ETL','t-p']],
+    stack:['Python','PostgreSQL','Pandas','D3.js','FastAPI','Airflow','Docker'],
+    desc:'Data engineering platform modeling 42 KPIs across 5 dimensions (emissions, logistics efficiency, road safety, service quality, social sustainability) for a private multimodal logistics corridor operator.',
+    full:'Designed the full data model, built ETL pipelines ingesting from multiple operational sources via APIs and file uploads, implemented automated threshold alerts, and delivered an interactive D3.js dashboard with historical trend analysis and progressive target tracking.',
+    features:[
+      '42 KPIs across 5 dimensions with configurable weights',
+      'Automated ETL pipelines (Airflow) from 6 operational data sources',
+      'Structured PostgreSQL DB with historical versioning',
+      'FastAPI backend with JSON endpoints for frontend consumption',
+      'D3.js interactive dashboard with deviation alerts',
+      'Auto-generated quarterly PDF performance reports',
+    ]
+  },
+  {
+    id:3, cat:['data','automation'],
+    acc:'var(--yellow)',
+    icon:'🌿', iconBg:'rgba(255,209,102,.1)',
+    title:'GEE Inventory Data Pipeline',
+    subtitle:'ISO 14064-compliant greenhouse gas emissions system',
+    year:'2023', duration:'7 mo', sector:'Road Concessions',
+    tags:[['Python','t-g'],['ETL','t-p'],['ISO 14064','t-y'],['reporting','t-y']],
+    stack:['Python','Pandas','SQLAlchemy','PostgreSQL','Matplotlib','Jinja2','FastAPI'],
+    desc:'Automated data pipeline for greenhouse gas inventory collection, processing and reporting across 3,800+ km of private road concessions. Produces ISO 14064 compliant inventory reports with Scope 1/2/3 breakdown.',
+    full:'Built automated ingestion from operational fuel/energy databases, calculation engine for emission factors per GHG Protocol methodology, decarbonization scenario modeler, and automated report generation (PDF/Excel) using Jinja2 templates and Matplotlib visualizations.',
+    features:[
+      'Multi-source data ingestion (fuel, energy, fleet, waste)',
+      'Scope 1/2/3 calculation engine (GHG Protocol / ISO 14064)',
+      'Scenario modeling for decarbonization targets',
+      'Automated PDF/Excel report generation with Jinja2',
+      'REST API for integration with client ERP systems',
+      'Historical trend database with year-over-year comparison',
+    ]
+  },
+  {
+    id:4, cat:['api','backend','devops'],
+    acc:'var(--purple)',
+    icon:'⚖️', iconBg:'rgba(157,122,255,.1)',
+    title:'Regulatory Sandbox API',
+    subtitle:'Technical compliance API for multimodal sandbox (ANTAQ/ANP/ANM)',
+    year:'2024', duration:'8 mo', sector:'Multi-sector Regulatory',
+    tags:[['FastAPI','t-p'],['compliance','t-p'],['REST','t-c'],['auth','t-g']],
+    stack:['Python','FastAPI','PostgreSQL','JWT Auth','Docker','Swagger','pytest'],
+    desc:'RESTful API backend supporting technical and legal compliance monitoring for private operators participating in regulatory sandbox environments across transport, ports, and energy sectors.',
+    full:'Designed and built a multi-sector compliance API handling quarterly delivery submissions, automated conformity checks against regulatory frameworks, legal opinion generation workflows, and audit trail logging. Deployed with JWT authentication, Swagger docs and comprehensive pytest suite.',
+    features:[
+      'RESTful API with versioning — FastAPI + PostgreSQL',
+      'JWT authentication with role-based permissions per sector',
+      'Automated regulatory conformity check engine',
+      'Quarterly submission workflow with status tracking',
+      'Full Swagger/OpenAPI documentation',
+      'Docker Compose deployment with health checks and logging',
+    ]
+  },
+  {
+    id:5, cat:['data','backend'],
+    acc:'var(--orange)',
+    icon:'⚡', iconBg:'rgba(255,140,66,.1)',
+    title:'ESG Monitoring Platform — Energy Sector',
+    subtitle:'Green bonds KPI system with SCADA integration — private utility',
+    year:'2022', duration:'10 mo', sector:'Energy / Utilities',
+    tags:[['SCADA','t-o'],['green bonds','t-y'],['GRI','t-g'],['Python','t-g']],
+    stack:['Python','Node.js','PostgreSQL','Power BI','SCADA API','Docker','CI/CD'],
+    desc:'Enterprise ESG monitoring platform for a private electricity transmission/distribution group, integrating operational SCADA data to produce GRI/SASB compliant sustainability reports and green bond KPI dashboards.',
+    full:'Integrated live SCADA data via OPC-UA and REST adapters, built transformation layers normalizing operational data to ESG metrics, implemented ICMA Green Bond Principles KPI framework, and delivered automated quarterly GRI report generation.',
+    features:[
+      'SCADA/OPC-UA integration for real-time operational data',
+      'GRI/SASB KPI framework implementation (50+ indicators)',
+      'ICMA Green Bond Principles KPI module with step-up/down logic',
+      'Automated GRI report generation (PDF) from structured data',
+      'Power BI embedded dashboards with executive and audit views',
+      'Docker + CI/CD pipeline with staging and production environments',
+    ]
+  },
+  {
+    id:6, cat:['data','automation'],
+    acc:'var(--pink)',
+    icon:'⛏️', iconBg:'rgba(255,77,157,.1)',
+    title:'Mining ESG Data Platform',
+    subtitle:'GRI Mining Sector + ANM compliance monitoring system',
+    year:'2023', duration:'9 mo', sector:'Mining / Extraction',
+    tags:[['GRI Mining','t-pk'],['Python','t-g'],['PostgreSQL','t-c'],['OGMP','t-pk']],
+    stack:['Python','FastAPI','PostgreSQL','Apache Airflow','React','Pandas','Docker'],
+    desc:'Integrated ESG data platform for a multinational mining operator, covering environmental (water, air, soil, biodiversity), social (communities, workers) and safety (dam safety, waste) indicators with ANM regulatory compliance reporting.',
+    full:'Built the full data engineering stack: Airflow DAGs for scheduled ingestion from 8 operational data sources, SBTi-aligned emission reduction scenario engine, GRI Mining Sector standard KPI framework, PRAD (degraded area recovery) status tracker, and automated ANM compliance report generator.',
+    features:[
+      'Airflow-orchestrated ETL from 8 operational data sources',
+      '50+ KPIs aligned to GRI Mining and ICMM Principles',
+      'SBTi-aligned GHG reduction scenario engine',
+      'Dam safety monitoring dashboard (PNSB compliance)',
+      'Environmental liability mapping and PRAD tracking module',
+      'Automated ANM regulatory reports from structured data',
+    ]
+  },
+  {
+    id:7, cat:['data','devops','api'],
+    acc:'var(--cyan)',
+    icon:'🛢️', iconBg:'rgba(0,212,255,.1)',
+    title:'O&G Emissions Monitoring System',
+    subtitle:'OGMP 2.0 methane tracking + TCFD disclosure pipeline',
+    year:'2023', duration:'9 mo', sector:'Oil & Gas / Midstream',
+    tags:[['OGMP 2.0','t-c'],['Python','t-g'],['TCFD','t-c'],['streaming','t-p']],
+    stack:['Python','Kafka','PostgreSQL','FastAPI','Grafana','Docker','Terraform'],
+    desc:'Near-real-time methane and GHG emissions monitoring system for a private midstream O&G operator, aligned to OGMP 2.0, with automated TCFD/ISSB S2 disclosure reporting and sustainability-linked loan KPI tracking.',
+    full:'Built a streaming data pipeline (Kafka) ingesting sensor data from pipeline segments and compression stations, implemented OGMP 2.0 Level 4/5 measurement methodology, SLL step-up/down KPI calculation engine, climate scenario analysis (1.5°C/2°C/4°C), and automated TCFD report generation.',
+    features:[
+      'Kafka streaming pipeline from IoT sensors on pipeline assets',
+      'OGMP 2.0 Level 4/5 methane quantification engine',
+      'SLL KPI module with automated step-up/down calculation',
+      'TCFD/ISSB S2 report generator with scenario analysis',
+      'Grafana real-time dashboards for operations and compliance',
+      'Terraform IaC for AWS cloud infrastructure provisioning',
+    ]
+  },
+  {
+    id:8, cat:['automation','backend'],
+    acc:'var(--green)',
+    icon:'🤖', iconBg:'rgba(0,255,157,.1)',
+    title:'Proposal & Document Automation Engine',
+    subtitle:'Multi-sector technical proposal generator — Node.js + docx',
+    year:'2026', duration:'2 wk', sector:'Internal Tooling',
+    tags:[['Node.js','t-g'],['automation','t-g'],['CLI','t-c'],['templating','t-p']],
+    stack:['Node.js','docx.js','JavaScript','CLI','JSON','Bash'],
+    desc:'Automated engine generating professional Word technical proposals from structured JSON sector data. Single script execution produces multiple fully-formatted documents (cover, NDA client section, scope, Gantt, team, commercial) in minutes.',
+    full:'Built a reusable document generation framework using docx.js with a data-driven architecture — sector-specific content defined as JSON objects, shared rendering functions for all document sections. Generates cover pages, confidential client profiles, scoped deliverables, Gantt-style tables, team matrices and signature blocks with consistent corporate formatting.',
+    features:[
+      'Single-script generates N proposals in one execution',
+      'Data-driven: sector content as JSON, shared renderers',
+      'Full Word formatting: colors, borders, shading, headers/footers',
+      'Automated page numbering, section headers, Gantt tables',
+      'Confidential client section with NDA field suppression',
+      'Output: production-ready .docx files, zero manual editing required',
+    ]
+  },
+];
+
+const SKILLS=[
+  {icon:'🐍',name:'Backend Engineering',tags:['Python','Node.js','FastAPI','Express','REST APIs','PostgreSQL','SQLAlchemy']},
+  {icon:'📦',name:'DevOps & Infrastructure',tags:['Docker','CI/CD','GitHub Actions','Terraform','AWS','Nginx','Linux']},
+  {icon:'🔄',name:'Data Engineering',tags:['Apache Airflow','Kafka','ETL Pipelines','Pandas','dbt','SQLAlchemy','Parquet']},
+  {icon:'📊',name:'Data Visualization',tags:['Power BI','D3.js','Grafana','Matplotlib','Plotly','Tableau']},
+  {icon:'🌐',name:'Frontend',tags:['React','HTML/CSS','JavaScript','TypeScript','Tailwind CSS','Vite']},
+  {icon:'🗄️',name:'Databases',tags:['PostgreSQL','MySQL','Redis','MongoDB','TimescaleDB','DuckDB']},
+  {icon:'📋',name:'Standards & Compliance',tags:['GRI','ISO 14064','OGMP 2.0','TCFD','GHG Protocol','SBTi','ICMM']},
+  {icon:'🔐',name:'Security & Auth',tags:['JWT','OAuth 2.0','RBAC','LGPD','API rate limiting','HTTPS/TLS']},
+];
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function renderProjects(cat='all'){
+  const list = cat==='all' ? PROJECTS : PROJECTS.filter(p=>p.cat.includes(cat));
+  document.getElementById('grid').innerHTML = list.map(p=>`
+    <div class="proj-card" style="--card-acc:${p.acc}" onclick="openModal(${p.id})">
+      <div class="card-head">
+        <div class="card-icon" style="background:${p.iconBg}">${p.icon}</div>
+        <div class="card-tags">${p.tags.map(([t,c])=>`<span class="tag ${c}">${t}</span>`).join('')}</div>
+      </div>
+      <div class="card-title">${p.title}</div>
+      <div style="font-size:.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:.6rem">${p.subtitle}</div>
+      <div class="card-desc">${p.desc}</div>
+      <div class="card-stack">${p.stack.slice(0,5).map(s=>`<span class="stk-pill">${s}</span>`).join('')}${p.stack.length>5?`<span class="stk-pill">+${p.stack.length-5}</span>`:''}</div>
+      <div class="card-foot">
+        <span class="card-year">${p.year} · ${p.duration}</span>
+        <span class="card-sector">${p.sector}</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderSkills(){
+  document.getElementById('skill-grid').innerHTML = SKILLS.map(s=>`
+    <div class="skill-card">
+      <span class="skill-icon">${s.icon}</span>
+      <div class="skill-name">${s.name}</div>
+      <div class="skill-tags">${s.tags.map(t=>`<span class="stk-pill">${t}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+function filter(cat,ev){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  if(ev&&ev.target)ev.target.classList.add('active');
+  renderProjects(cat);
+}
+
+function openModal(id){
+  const p=PROJECTS.find(x=>x.id===id);
+  document.getElementById('modal-body').innerHTML=`
+    <div class="modal-badge">${p.cat[0].toUpperCase()}</div>
+    <h2>${p.title}</h2>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-bottom:1rem">${p.subtitle}</p>
+    <p>${p.full}</p>
+    <div class="modal-meta">
+      <div class="m-item"><div class="m-label">year</div><div class="m-val">${p.year}</div></div>
+      <div class="m-item"><div class="m-label">duration</div><div class="m-val">${p.duration}</div></div>
+      <div class="m-item"><div class="m-label">sector</div><div class="m-val" style="font-size:.75rem">${p.sector}</div></div>
+    </div>
+    <div class="modal-stack">${p.stack.map(s=>`<span class="stk-pill">${s}</span>`).join('')}</div>
+    <div class="feat-title">// key_features</div>
+    <ul class="feat-list">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>`;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeOv(e){if(e.target===document.getElementById('overlay'))closeModal();}
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+
+// Intersection observer
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.08});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+renderProjects();
+renderSkills();
+setTimeout(()=>document.querySelectorAll('.fade').forEach(el=>obs.observe(el)),100);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
